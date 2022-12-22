@@ -3,6 +3,8 @@ from airflow.decorators import task
 from airflow.operators.empty import EmptyOperator
 from datetime import datetime, timedelta 
 
+from airflow.providers.microsoft.azure.operators.asb import AzureServiceBusSendMessageOperator #import error
+
 dag_owner = 'Astronomer'
 
 default_args = {'owner': dag_owner,
@@ -31,13 +33,15 @@ with DAG(dag_id='extraction_pipeline',
         tdf_dhb_data_extraction_check_status = EmptyOperator(task_id='tdf_dhb_data_extraction_check_status')
         
         #Connect using keyvault value of sftp creds and downlod sftp files into elz location
+        #https://registry.astronomer.io/providers/microsoft-azure/modules/sftptowasboperator
         SftpConnector = EmptyOperator(task_id='SftpConnector')
 
         #Ingestion pipeline - Move elz to ilz
         MoveELZtoILZ = EmptyOperator(task_id='MoveELZtoILZ')
 
         #Push message to Azure Service Bus
-        PushASB = EmptyOperator(task_id='PushASB')
+        #https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/5.0.1/operators/asb.html#send-message-to-azure-service-bus-queue
+        PushASB = EmptyOperator(task_id="PushASB",)
 
         tdf_dhb_data_extration >> tdf_dhb_data_extraction_portal_sftp >> SftpConnector >> MoveELZtoILZ >> PushASB
         MoveELZtoILZ >> tdf_dhb_data_extraction_check_status
