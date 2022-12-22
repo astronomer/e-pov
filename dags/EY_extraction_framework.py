@@ -3,8 +3,6 @@ from airflow.decorators import task
 from airflow.operators.empty import EmptyOperator
 from datetime import datetime, timedelta 
 
-from airflow.providers.microsoft.azure.operators.asb import AzureServiceBusSendMessageOperator #import error
-
 dag_owner = 'Astronomer'
 
 default_args = {'owner': dag_owner,
