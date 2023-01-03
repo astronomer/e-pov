@@ -1,9 +1,8 @@
-#test
-name: Astronomer CI - Deploy code
+name: Staging Deploy
 on:
   push:
     branches:
-      - main
+      - staging
 
 env:
   ## Sets Deployment API key credentials as environment variables
@@ -14,7 +13,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: deploy
+    environment: Stage
     steps:
     - name: checkout repo
       uses: actions/checkout@v3
