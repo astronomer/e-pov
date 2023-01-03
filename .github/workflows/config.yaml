@@ -6,14 +6,14 @@ on:
 
 env:
   ## Sets Deployment API key credentials as environment variables
-  ASTRONOMER_KEY_ID: "IMYDSEKSMBWb3A3p0VtvFcINJT5yQ1RO"
-  ASTRONOMER_KEY_SECRET: "_BXxayoiSXEX8d79sBrVhHIZEoMrmIAWZWu_pBf9ylfy156ugPl1u2KdEzLgl6mG"
-  ASTRONOMER_DEPLOYMENT_ID: ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+  ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
+  ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
   DAG_FOLDER: dags/
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: deploy
     steps:
     - name: checkout repo
       uses: actions/checkout@v3
