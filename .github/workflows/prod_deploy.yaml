@@ -1,5 +1,4 @@
-#test
-name: Astronomer CI - Deploy code
+name: Prod Deploy
 on:
   push:
     branches:
@@ -14,7 +13,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: deploy
+    environment: Prod
     steps:
     - name: checkout repo
       uses: actions/checkout@v3
@@ -50,4 +49,4 @@ jobs:
     - name: Image and DAG Deploy to Astro
       if: steps.deployment-type.outputs.DAGS_ONLY == 0
       run: |
-        astro deploy 
+        astro deploy -f
