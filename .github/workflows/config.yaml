@@ -6,8 +6,9 @@ on:
 
 env:
   ## Sets Deployment API key credentials as environment variables
-  ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
-  ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+  ASTRONOMER_KEY_ID: ${{secrets.ASTRONOMER_KEY_ID}}
+  ASTRONOMER_KEY_SECRET: ${{secrets.ASTRONOMER_KEY_SECRET}}
+  ASTRONOMER_DEPLOYMENT_ID: ${{secrets.ASTRONOMER_DEPLOYMENT_ID}}
   DAG_FOLDER: dags/
 
 jobs:
@@ -39,7 +40,6 @@ jobs:
     - name: Install Astro CLI
       run: |
         curl -sSL https://install.astronomer.io | sudo bash -s
-        astro login -t ${{ secrets.ASTRONOMER_KEY_SECRET }}
     # If only DAGs changed, do a DAG-only deploy
     - name: DAG Deploy to Astro
       if: steps.deployment-type.outputs.DAGS_ONLY == 1
