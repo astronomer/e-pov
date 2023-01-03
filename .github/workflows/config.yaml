@@ -43,9 +43,9 @@ jobs:
     - name: DAG Deploy to Astro
       if: steps.deployment-type.outputs.DAGS_ONLY == 1
       run: |
-        astro deploy --dags
+        astro deploy ${{secrets.ASTRONOMER_DEPLOYMENT_ID}} --dags
     # If any other files changed, deploy the entire Astro project
     - name: Image and DAG Deploy to Astro
       if: steps.deployment-type.outputs.DAGS_ONLY == 0
       run: |
-        astro deploy -d clbwioico362139kn2ihm9l84sa
+      astro deploy ${{secrets.ASTRONOMER_DEPLOYMENT_ID}}
