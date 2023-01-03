@@ -49,4 +49,4 @@ jobs:
     - name: Image and DAG Deploy to Astro
       if: steps.deployment-type.outputs.DAGS_ONLY == 0
       run: |
-        astro deploy 
+        astro deploy -f
