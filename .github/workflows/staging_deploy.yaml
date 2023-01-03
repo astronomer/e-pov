@@ -50,3 +50,5 @@ jobs:
       if: steps.deployment-type.outputs.DAGS_ONLY == 0
       run: |
         astro deploy -f
+    - name: Submit PR
+      uses: peter-evans/create-pull-request@v4
